@@ -24,11 +24,13 @@
         }
 
         &:focus:invalid {
+            //當fouce input 如果無效時 產生下底線為橘色
             border-bottom: 3px solid $color-secondary-dark;
 
         }
 
         &::-webkit-input-placeholder {
+            //placeholder 字體的顏色
             color: $color-grey-dark-2;
         }
     }
@@ -47,9 +49,14 @@
     }
 
     &__input:placeholder-shown+&__label {
-        opacity: 0;
-        visibility: hidden;
+        // 需要先input 才能執行label  所以寫在前面
+        // ＋ ->是指相鄰的兩個同級的class ~ -> 是指同級但不相鄰的兩個class
+        //當placeholder-shown 代表目前沒有輸入,所以我們希望能夠先隱藏起來
+        opacity: 0; //只有opacity ->元素還在頁面上 只是沒顯示
+        visibility: hidden; //->元素整個消失
         transform: translateY(-4rem);
+
+        //這邊為full name一開始的狀態 ,當有輸入文字時 才會transition-> label
     }
 
     &__radio-group {
