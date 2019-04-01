@@ -1,7 +1,9 @@
 .btn {
     &,
-    &:link,
-    &:visited {
+    &:link, //沒有被按過 ->a的屬性
+    &:visited //被拜訪過 ->a的屬性
+    // 因為button 沒有上述兩個屬性 所以才需要＆  
+     {
         text-transform: uppercase;
         text-decoration: none;
         padding: 1.5rem 4rem;

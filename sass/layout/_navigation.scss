@@ -1,0 +1,80 @@
+.navigation {
+    &__checkbox {
+        display: none;
+    }
+
+    &__button {
+        background-color: $color-white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        right: 6rem;
+        top: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+    }
+
+    &__background {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        //顏色由內向外擴散的 前面的參數是內部 後面是外部
+        z-index: 1000;
+
+        transform: scale(80);
+        //這邊放大是為了讓背景圖片(漸層)放大至遮住全螢幕
+    }
+
+    &__nav {
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1500;
+    }
+
+    &__list {
+        @include incenter;
+        //引用_mixin.scss裡面所設定 incenter
+        list-style: none;
+        text-align: center;
+    }
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link {
+
+        &:link,
+        &:visited {
+            display: inline-block;
+            font-size: 3rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            color: $color-white;
+            font-weight: 300;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%, $color-white 100%);
+            background-size: 220%; //使得顏色的部分蓋過整個li
+            transition: background-position .4s;
+            span{
+                margin-right: 1.5rem;
+                display: inline-block;
+            }
+        }
+        &:hover,
+        &:active{
+            background-position: 100%;
+            // 讓背景圖片向左100%
+            color: $color-primary;
+            transform: translateX(1rem);
+        }
+    }
+
+}
