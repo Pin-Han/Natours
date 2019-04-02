@@ -12,6 +12,9 @@
         top: 6rem;
         border-radius: 50%;
         z-index: 2000;
+        box-shadow: 0 1rem 3rem rgba($color: $color-black, $alpha: .1);
+        text-align: center;
+        cursor: pointer;
     }
 
     &__background {
@@ -25,17 +28,22 @@
         //顏色由內向外擴散的 前面的參數是內部 後面是外部
         z-index: 1000;
 
-        transform: scale(80);
+        //transform: scale(80);
         //這邊放大是為了讓背景圖片(漸層)放大至遮住全螢幕
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        //後者為動畫曲線
     }
 
     &__nav {
         height: 100vh;
-        width: 100%;
+        //width: 100%;
         position: fixed;
         top: 0;
-        right: 0;
+        left: 0;
         z-index: 1500;
+        opacity: 0;
+        width: 0;
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     &__list {
@@ -43,6 +51,7 @@
         //引用_mixin.scss裡面所設定 incenter
         list-style: none;
         text-align: center;
+        width: 100%;
     }
 
     &__item {
@@ -63,13 +72,15 @@
             background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%, $color-white 100%);
             background-size: 220%; //使得顏色的部分蓋過整個li
             transition: background-position .4s;
-            span{
+
+            span {
                 margin-right: 1.5rem;
                 display: inline-block;
             }
         }
+
         &:hover,
-        &:active{
+        &:active {
             background-position: 100%;
             // 讓背景圖片向左100%
             color: $color-primary;
@@ -77,4 +88,69 @@
         }
     }
 
+    //FUNCTIONAL
+    &__checkbox:checked~&__background {
+        transform: scale(80);
+    }
+
+    &__checkbox:checked~&__nav {
+        opacity: 1;
+        width: 100%; //這邊之後改成100%
+    }
+
+    //icon
+    &__icon {
+
+        margin-top: 3.5rem;
+        position: relative;
+
+        &,
+        &::before,
+        &::after {
+            width: 3rem;
+            height: 2px;
+            background-color: $color-grey-dark-3;
+            display: inline-block;
+        }
+
+        // 
+        &::before,
+        //要先定義 before after的content
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0%;
+            transition: all .2s;
+        }
+
+        &::after {
+            top: .8rem;
+        }
+
+        &::before {
+            top: -.8rem;
+        }
+    }
+
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    &__button:hover &__icon::before {
+        top: -1rem;
+    }
+
+    &__checkbox:checked+&__button &__icon {
+        background-color: transparent;
+    }
+
+    &__checkbox:checked+&__button &__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+    }
+
+    &__checkbox:checked+&__button &__icon::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }
 }
