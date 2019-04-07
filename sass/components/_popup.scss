@@ -1,0 +1,45 @@
+.popup {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, $alpha: .8);
+    z-index: 99999;
+
+    &__content {
+        @include incenter;
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, $alpha: .2);
+        border-radius: 3px;
+        display: table; //這邊設為table，與下方left right相互應
+        overflow: hidden; //把圖片邊緣給去掉
+    }
+
+    &__left {
+        width: 33.3333333%;
+        display: table-cell; // 設定為table-cell 代表 與下方table-cell 一樣的高度
+    }
+
+    &__right {
+        width: 66.6666666%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+        column-count: 2; //把字體分成2欄  =  = ->分為2欄
+        column-gap: 4rem; //中間 2欄區塊字體 的寬度 =   =  ->中間為4rem   
+        column-rule: 1px solid $color-grey-light-2;  //兩段文字的中間線條 -> ｜ 
+        hyphens: auto; // 連字符 -> ' - '  需要先在html 定義語言 -> lang="en" 
+    } 
+}
