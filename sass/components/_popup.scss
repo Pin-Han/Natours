@@ -6,7 +6,16 @@
     left: 0;
     background-color: rgba($color-black, $alpha: .8);
     z-index: 99999;
-display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    &:target {
+        //當class="popup"的id 被啟動時 可以觸發
+        opacity: 1;
+        visibility: visible;
+    }
+
     &__content {
         @include incenter;
         width: 75%;
@@ -39,7 +48,7 @@ display: none;
         margin-bottom: 4rem;
         column-count: 2; //把字體分成2欄  =  = ->分為2欄
         column-gap: 4rem; //中間 2欄區塊字體 的寬度 =   =  ->中間為4rem   
-        column-rule: 1px solid $color-grey-light-2;  //兩段文字的中間線條 -> ｜ 
+        column-rule: 1px solid $color-grey-light-2; //兩段文字的中間線條 -> ｜ 
         hyphens: auto; // 連字符 -> ' - '  需要先在html 定義語言 -> lang="en" 
-    } 
+    }
 }
